@@ -7,18 +7,25 @@ from third_parties.linkedin import scrape_linkedin_profile
 
 from agents.linkedin_lookup_agent import lookup
 
+from output_parsers import person_intel_parser
 
-if __name__ == "__main__":
+
+def application(name: str) -> str:
     summary_template = """
         Dada a informação do Linkedin {information} que foi fornecida, gostaria que criasse:
         1. Um breve resumo
         2. Dois Fatos interessantes
+        \n{format_instructions}
     """
 
     linkedin_profile_url = lookup(name="João Vitor Yukio Bordin Yamashita")
 
     promt_template = PromptTemplate(
-        input_variables=["information"], template=summary_template
+        input_variables=["information"],
+        template=summary_template,
+        partial_variables={
+            "format_intructions": {person_intel_parser.get_format_instructions()}
+        },
     )
 
     llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
@@ -29,4 +36,8 @@ if __name__ == "__main__":
 
     linkedin_data = scrape_linkedin_profile(linkedin_url=linkedin_profile_url)
 
-    print(chain.run(information=linkedin_data))
+    return chain.run(information=linkedin_data)
+
+
+if __name__ == "__main__":
+    print(application(name="João Vitor Yukio Bordin Yamashita"))
