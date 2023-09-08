@@ -24,7 +24,7 @@ def application(name: str) -> str:
         input_variables=["information"],
         template=summary_template,
         partial_variables={
-            "format_intructions": {person_intel_parser.get_format_instructions()}
+            "format_instructions": person_intel_parser.get_format_instructions()
         },
     )
 
