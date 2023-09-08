@@ -9,6 +9,8 @@ black = "*"
 openai = "*"
 google-search-results = "*"
 tweepy = "*"
+pinecone-client = "*"
+tiktoken = "*"
 
 [dev-packages]
 
