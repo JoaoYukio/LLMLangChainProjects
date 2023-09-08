@@ -23,7 +23,7 @@ def application(name: str) -> str:
     promt_template = PromptTemplate(
         input_variables=["information"],
         template=summary_template,
-        partial_variables={
+        partial_variables={  # Variaveis fixas
             "format_instructions": person_intel_parser.get_format_instructions()
         },
     )
