@@ -11,6 +11,8 @@ google-search-results = "*"
 tweepy = "*"
 pinecone-client = "*"
 tiktoken = "*"
+pypdf = "*"
+faiss-cpu = "*"
 
 [dev-packages]
 
